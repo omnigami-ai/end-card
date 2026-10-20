@@ -97,6 +97,8 @@ set in type), or the placeholder pill in the accent until there is one.
   hats alone for the second: the outro. Product-film's last two chords.
 - Mastered around −14 LUFS.
 
+The score's sound is `music.style`: here `'synth'`, the default. For the user's product, pick by what it is: `'organic'` for plants, food and drink, and other natural or handmade things; `'synth'` (oscillators, the default) for software and tools; `'felt'` (a sparse felt piano over a sub bass and a light kit) for a quiet, minimal film. In a break (`music.breaks`) the drums, bass and lead stop and the chords play on; the film's name seeds the key (always major), the progressions and the patterns.
+
 ## Banned
 
 - More than one action; an action that isn't the site's, or doesn't work as

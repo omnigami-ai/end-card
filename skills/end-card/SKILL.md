@@ -14,8 +14,8 @@ made for omnigami's examples. The ask of its own launch
 film). Its motion, timing and layout stay; its words, colours and mark become
 the user's.
 
-It ends a film. In the product film it cuts in after the payoff (the
-`payoff-beats` shot), on the third beat of the payoff's second bar.
+It ends a film. In the product film it cuts in after the payoff, on the
+third beat of the payoff's second bar.
 
 Read `style.md` before you build and `critique.md` before you judge.
 
