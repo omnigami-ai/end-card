@@ -27,7 +27,7 @@
   let W = 1920, H = 1080, U = 10.8; // U: 1% of the frame's short side
 
   const canvas = document.getElementById('c');
-  const g = canvas.getContext('2d', { willReadFrequently: true });
+  const g = kit.textContext(canvas.getContext('2d', { willReadFrequently: true }));
 
   // ADAPT: the product's colours. Its ground and text (Lamplit is dark first); the accent is its
   // brand colour (Lamplit's amber): words as they arrive, and the button if the action is one.
@@ -88,7 +88,7 @@
   // a word slammed in: from oversized and soft to set in 0.22 s. It grows from its middle, or from
   // its left edge (`fromLeft`) when something sits just to its left, as the mark does beside the name,
   // and never past 3U from the frame's edge.
-  function slam(c, s, x, y, font, size, t, t0, colour, tracking, fromLeft = false) {
+  function slam(c, s, x, y, font, size, t, t0, colour, tracking, fromLeft = false) { s = kit.copyText(s);
     const d = steps(t, t0);
     if (d < 0) return;
     setText(c, font, size, tracking);
@@ -102,12 +102,13 @@
     c.fillStyle = colour; c.fillText(s, -ox, capOf(size) / 2); c.restore();
   }
   // a line whose words land one after another, a step apart
-  function line(c, text, x, y, font, size, t, t0, { colour = INK, stagger = F, align = 'left', tracking } = {}) {
-    const words = text.split(' '), space = widthOf(c, font, size, ' ', tracking);
+  function line(c, text, x, y, font, size, t, t0, { colour = INK, stagger = F, align = 'left', tracking } = {}) { text = kit.copyText(text);
+    if(kit.hasCJK(text))tracking=0;
+    const words = kit.words(text, ' '), space = widthOf(c, font, size, ' ', tracking);
     const widths = words.map((w) => widthOf(c, font, size, w, tracking));
-    const total = widths.reduce((a, b) => a + b, 0) + space * (words.length - 1);
+    const total = kit.hasCJK(text) ? widths.reduce((a,b)=>a+b,0) + words.slice(0,-1).reduce((n,_,i)=>n+widthOf(c,font,size,kit.wordGap(text,i),tracking),0) : widths.reduce((a, b) => a + b, 0) + space * (words.length - 1);
     let wx = align === 'center' ? x - total / 2 : align === 'right' ? x - total : x;
-    words.forEach((w, i) => { slam(c, w, wx, y, font, size, t, t0 + i * stagger, arrive(t, t0 + i * stagger, colour), tracking); wx += widths[i] + space; });
+    words.forEach((w, i) => { slam(c, w, wx, y, font, size, t, t0 + i * stagger, arrive(t, t0 + i * stagger, colour), tracking); wx += widths[i] + (kit.hasCJK(text) ? widthOf(c,font,size,kit.wordGap(text,i),tracking) : space); });
   }
 
   // ---------- KEEP: the layout: the lockup, then the rows under it ----------
@@ -204,14 +205,14 @@
     sections: [{ from: 0, to: 1, kick: 0.8, hats: 0.6, clap: 0.45, bass: 0.65, pad: 0.55 }, { from: 1, to: 2.25, pad: 0.75, hats: 0.3 }],
   };
   const long = (n) => 'maximum workflow momentum meaning homework wombat memo warm maximum'.slice(0, n).trimEnd();
-  window.template = {
+  window.template = kit.film({
     fps: FPS, duration: DURATION, sizes: SHAPES, width: W, height: H, defaults: () => ({ size: '16:9', ...DEFAULTS }), fields: FIELDS,
     prepare, seek: (t, values) => seek(t, values), cues, music,
     keyTimes: [0.95, 1.45, 1.95, 2.8, 4.45],
     // the quick test also tries the button, with the product-film runs' own words and at a button's longest (24)
     stress: { button: { actionStyle: 'button', action: 'Start free trial' }, buttonLong: { actionStyle: 'button', action: long(24) } },
-  };
+  });
   const q = new URLSearchParams(location.search);
-  if (window.parent === window && !q.has('render')) prepare().then(() => { const t0 = performance.now(); const loop = () => { seek(((performance.now() - t0) / 1000) % DURATION, { size: q.get('size') || '16:9' }); requestAnimationFrame(loop); }; loop(); });
+  if (window.parent === window && !q.has('render')) window.template.prepare().then(() => { const t0 = performance.now(); const loop = () => { seek(((performance.now() - t0) / 1000) % DURATION, { size: q.get('size') || '16:9' }); requestAnimationFrame(loop); }; loop(); });
 })();
 </script>

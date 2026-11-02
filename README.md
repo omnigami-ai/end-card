@@ -2,7 +2,7 @@
 
 Your mark, your address and the one action, held to the last frame.
 
-A 4.5-second end card: your mark is born and slides aside for your name, then your address, the one action (a line to type or your own button) and a tagline land on the beat and hold. Every launch video needs one.
+An end card: your mark is born and slides aside for your name, then your address, the one action (a line to type or your own button) and a tagline land on the beat and hold. Every launch video needs one.
 
 Watch it play live, and change its words, at [omnigami.ai/skills/end-card](https://omnigami.ai/skills/end-card).
 

@@ -5,6 +5,8 @@ description: Make a 4-second end card for a launch video in square, wide and tal
 
 # End card
 
+For Japanese, Korean or Chinese product pages, keep the copy in that language and set the film’s `lang` to the page’s `<html lang>`; bundled Noto faces and phrase breaks handle the text.
+
 One shot from a launch film: the ask, held to the last frame. The product's
 mark is born in the middle and slides aside (in tall, up) as its name slams
 in; then the address, the one action and a tagline land on the beat, and
