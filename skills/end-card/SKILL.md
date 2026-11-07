@@ -1,6 +1,10 @@
 ---
 name: end-card
-description: Make a 4-second end card for a launch video in square, wide and tall, with sound. The product's mark is born and slides aside for its name, then the address, the one action (a line to type, or the product's own button) and a tagline land on the beat and hold to the last frame. Use when the user asks for an end card, an outro, a closing frame, a call to action, a logo lockup or "the ask" for their product's launch video, teaser, demo or ad.
+description: >-
+  End card for a launch video: your mark, name, address, the one action (a line to type or your own button) and a
+  tagline, landing on the beat and held to the last frame. 4 seconds, square, wide and tall, with sound. Use when the
+  user asks for an end card, outro, closing frame, call to action or logo lockup for a launch video, teaser, demo or
+  ad.
 ---
 
 # End card
